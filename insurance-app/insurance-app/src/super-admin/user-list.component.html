@@ -1,0 +1,58 @@
+<div class="policy">
+    <br><br><br>
+    <hr />
+    <img src="assets/images/Home4.jpg" width="100%" height="500px" />
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <button type="button" [routerLink]="['/superadminpolicylist']" class="btn btn-link">Go Back</button>
+            </div>
+            <div class="col-sm">
+                <div class="search-hero">
+                    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                        placeholder="search">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr />
+    <div class="row">
+        <div *ngFor="let user of (users | filter:searchText)" class="col-md-4">
+            <div class="well hoverwell thumbnail">
+                <br />
+                <div class="card text-center"
+                    style="width: 18rem; background-image: url(https://wallpapercave.com/wp/wp2723829.jpg);">
+                    <div class="card-body">
+                        <h3 class="card-title">{{user.firstName}}&nbsp;{{user.lastName}}</h3>
+                        <p class="card-text">
+
+                            <b>Email :</b> {{user.email}}<br>
+                            <b>Phone :</b> {{user.phone}}<br>
+                            <b>City :</b> {{user.city}}<br><br>
+                            <select class="form-control wp-70" [(ngModel)]=user.role>
+                                <option *ngFor="let role of roleList" [ngValue]="role">{{role}}</option>
+     
+                            </select><br>
+                            <select class="form-control wp-70" [(ngModel)]=user.status>
+                                <option *ngFor="let status of statusList" [ngValue]="status">{{status}}</option>
+     
+                            </select><br>
+
+
+                        </p>
+
+
+                        <div>
+                            <button type="button" (click)="editBtn(user)" class="btn btn-warning">Modify
+                            </button>&nbsp;
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

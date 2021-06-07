@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm"><br>
-                <button [routerLink]="['/adminpolicylist']" type="button" class="btn btn-link">Go Back</button>
+                <button (click)="backBtn()" type="button" class="btn btn-link">Go Back</button>
             </div>
             <div class="col-sm"><br>
                 <div class="row">
@@ -84,12 +84,33 @@
             <hr />
             <div class="row justify-content-center">
                 <div class="col-md-5">
+                <p>Get all benefits for you and your family with one click!</p>
+                <button type="button" (click)="buyBtn(policy.policyId)" [disabled]="click" class="btn btn-warning">Buy Now-></button>&nbsp;
+                
                     <button type="button" (click)="editBtn(policy?.policyId)" class="btn btn-warning">Edit
                         Policy</button>&nbsp;
                     <button type="button" (click)="removeBtn(policy?.policyId)" [disabled]="click"
                         class="btn btn-danger">Remove</button>
 
                     <br><br><br>
+                    <div class="card">
+                        <div class="card-body">
+                          <h3>Policy Holders List</h3>
+                          <div *ngIf = "!userListEmpty()">
+                         <div *ngFor="let user of users">
+                            <ul>
+                                <li>
+                                    {{user.firstName}}&nbsp;{{user.lastName}}
+                                </li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div *ngIf = "userListEmpty()">
+                            <h4 class="list">Policy Holders List is empty!</h4>
+                           </div>
+            
+                        </div>
+                      </div><br><br>
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">Want to know more?</h5>

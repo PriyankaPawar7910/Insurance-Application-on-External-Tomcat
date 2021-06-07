@@ -1,10 +1,17 @@
 package com.insurancepolicy.model;
 
+/**
+ * This class consists {@link User}, {@link Policy}, {@link ClaimedPolicy}
+ * object including constructor and getters and setters
+ * 
+ * @author priypawa
+ *
+ */
 public class ResponseTemplate {
 	private User user;
 	private Policy policy;
 	private ClaimedPolicy claimedPolicy;
-	
+
 	public ResponseTemplate() {
 		// TODO Auto-generated constructor stub
 	}
@@ -44,10 +51,5 @@ public class ResponseTemplate {
 	public String toString() {
 		return "ResponseTemplate [user=" + user + ", policy=" + policy + ", claimedPolicy=" + claimedPolicy + "]";
 	}
-	
-	
-
-
-	
 
 }

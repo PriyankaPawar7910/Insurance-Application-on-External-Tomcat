@@ -1,43 +1,44 @@
-import { Component, OnInit } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
-import { UserAuthenticateService } from "src/services/user-authenticate.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserAuthenticateService } from 'src/services/user-authenticate.service';
 
 @Component({
-    selector:'nav-bar',
-    templateUrl:'./nav-bar.component.html'
-    
+    selector: 'nav-bar',
+    templateUrl: './nav-bar.component.html'
 })
-export class NavBarComponent implements OnInit{
-    userName : string
+export class NavBarComponent implements OnInit {
+    userName: string;
 
-    constructor(private router:Router,public userAuthService:UserAuthenticateService){
-  
+    constructor(private router: Router, public userAuthService: UserAuthenticateService) {
     }
-    ngOnInit(){
-        
-        console.log(this.userName)
+    ngOnInit(): void {
+        console.log(this.userName);
         this.userName = this.userAuthService.getUserName();
     }
-    logoutBtn(){
+    logoutBtn(): void {
         this.userAuthService.removeUserName();
         this.userAuthService.setUserName(null);
-        console.log(this.userAuthService.getUserName())
-         this.userAuthService.logOutUserName()
-         this.userAuthService.logOutUserId()
-         this.router.navigateByUrl('/home')
+        this.userAuthService.setUserRole(null);
+        console.log(this.userAuthService.getUserName());
+        this.userAuthService.logOutUserName();
+        this.userAuthService.logOutUserId();
+        this.userAuthService.logOutUserRole();
+        this.router.navigateByUrl('/home');
     }
-    profileBtn(){
-        this.router.navigateByUrl('/profile')
+    profileBtn(): void{
+        this.router.navigateByUrl('/profile');
     }
-    aboutBtn(){
-        this.router.navigateByUrl('/about')
+    aboutBtn(): void {
+        this.router.navigateByUrl('/about');
     }
-    portfolioBtn(){
-        this.router.navigateByUrl('/portfolio')
+    portfolioBtn(): void {
+        this.router.navigateByUrl('/portfolio');
     }
-    contactBtn(){
-        this.router.navigateByUrl('/contact')
+    contactBtn(): void {
+        this.router.navigateByUrl('/contact');
     }
+    signUpBtn(): void{
+        this.router.navigateByUrl('/register');
 
-    
+    }
 }

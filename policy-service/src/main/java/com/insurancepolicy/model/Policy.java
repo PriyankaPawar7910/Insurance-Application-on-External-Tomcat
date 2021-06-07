@@ -24,15 +24,15 @@ public class Policy {
 	private float premiumAmount;
 	@Column(name = "policy_type")
 	private String policyType;
-	
+	@Column(name = "status")
+	private boolean status;
+
 	public Policy() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public Policy(int policyId, String policyName, String policyDescription, int duration, float premiumAmount,
-			String policyType) {
+			String policyType, boolean status) {
 		super();
 		this.policyId = policyId;
 		this.policyName = policyName;
@@ -40,9 +40,16 @@ public class Policy {
 		this.duration = duration;
 		this.premiumAmount = premiumAmount;
 		this.policyType = policyType;
+		this.status = status;
 	}
 
+	public boolean isStatus() {
+		return status;
+	}
 
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 
 	public int getPolicyId() {
 		return policyId;
@@ -76,7 +83,6 @@ public class Policy {
 		this.premiumAmount = premiumAmount;
 	}
 
-
 	public String getPolicyType() {
 		return policyType;
 	}
@@ -85,31 +91,19 @@ public class Policy {
 		this.policyType = policyType;
 	}
 
-	
 	public String getPolicyDescription() {
 		return policyDescription;
 	}
-
-
 
 	public void setPolicyDescription(String policyDescription) {
 		this.policyDescription = policyDescription;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Policy [policyId=" + policyId + ", policyName=" + policyName + ", policyDescription="
 				+ policyDescription + ", duration=" + duration + ", premiumAmount=" + premiumAmount + ", policyType="
-				+ policyType + "]";
+				+ policyType + ", status=" + status + "]";
 	}
 
-
-
-
-
-	
-
-	
 }

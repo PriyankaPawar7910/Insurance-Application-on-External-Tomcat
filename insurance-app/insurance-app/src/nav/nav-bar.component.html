@@ -15,6 +15,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home</a>
         </li>
+        <li class="nav-item" *ngIf="!userAuthService.isUserLoggedIn()">
+          <button type="button" (click)="signUpBtn()" class="btn btn-link">SignUp</button>
+        </li>
         <li class="nav-item" *ngIf="userAuthService.isUserLoggedIn()">
           <button type="button" (click)="profileBtn()" class="btn btn-link">Profile</button>
         </li>

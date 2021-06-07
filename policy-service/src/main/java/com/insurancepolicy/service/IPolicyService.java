@@ -14,6 +14,6 @@ public interface IPolicyService {
 
 	Policy updatePolicy(Policy policy);
 
-	List<Policy> deletePolicy(int policyId);
+	Policy deletePolicy(Policy policy);
 
 }

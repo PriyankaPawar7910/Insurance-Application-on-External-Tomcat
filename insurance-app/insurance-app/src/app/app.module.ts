@@ -33,6 +33,14 @@ import { ContactPageComponent } from 'src/nav/contact.component';
 import { FilterPipe } from 'src/services/pipe.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProfileComponent } from 'src/user/profile.component';
+import { SuperAdminPolicyListComponent } from 'src/super-admin/super-admin-policy-list.component';
+import { SuperAdminPlansComponent } from 'src/super-admin/super-admin-plan.component';
+import { UsersListComponent } from 'src/super-admin/user-list.component';
+import { UpdateUserComponent } from 'src/super-admin/update-user.component';
+import { ToastrModule } from 'ngx-toastr';
+import { NotificationService } from 'src/services/notification.service';
+import {AuthguardServiceService} from 'src/app/authguard-service.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -57,7 +65,11 @@ import { ProfileComponent } from 'src/user/profile.component';
     AboutPageComponent,
     ContactPageComponent,
     FilterPipe,
-    ProfileComponent
+    ProfileComponent,
+    SuperAdminPolicyListComponent,
+    SuperAdminPlansComponent,
+    UsersListComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -65,12 +77,14 @@ import { ProfileComponent } from 'src/user/profile.component';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    Ng2SearchPipeModule
-  
+    Ng2SearchPipeModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+
   ],
-  providers: [PolicyService,UserService,
-    AuthenticationService,UserPolicyService,
-    UserAuthenticateService],
+  providers: [PolicyService, UserService,
+    AuthenticationService, UserPolicyService,
+    UserAuthenticateService, NotificationService,AuthguardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

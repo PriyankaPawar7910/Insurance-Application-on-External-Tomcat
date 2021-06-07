@@ -7,7 +7,7 @@ export interface UserPolicy    {
         phoneNo: string,
         city: string,
         password: string
-    },
+    };
     policy: {
         policyId: number,
         policyName: string,
@@ -15,13 +15,14 @@ export interface UserPolicy    {
         duration: number,
         premiumAmount: number,
         policyType: string
-    },
+    };
     claimedPolicy: {
         planId: number,
         userId: number,
         policyId: number,
         claimedDate: string,
         status: boolean
-    }
+    };
 }
+
 

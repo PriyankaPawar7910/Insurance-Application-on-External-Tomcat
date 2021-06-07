@@ -1,49 +1,72 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Policy } from "src/common/policy";
-import { UserPolicy } from "src/common/user-policy";
-import { PolicyService } from "src/services/policy.service";
-import { UserPolicyService } from "src/services/user-policy.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserPolicy } from 'src/common/user-policy';
+import { NotificationService } from 'src/services/notification.service';
+import { UserAuthenticateService } from 'src/services/user-authenticate.service';
+import { UserPolicyService } from 'src/services/user-policy.service';
 @Component({
-    selector:'user-policy-list',
-    templateUrl:'./user-policy-list.component.html',
-     styles: [`
+    selector: 'app-user-policy-list',
+    templateUrl: './user-policy-list.component.html',
+    styles: [`
      .thumbnail {min-height:100px;}
      .pad-left {margin-left:10px;}
-     
+
      `]
 
 })
-export class UserPolicyListComponent implements OnInit{
-    policies :Array<UserPolicy>
-    userPolicies : Array<UserPolicy>
+export class UserPolicyListComponent implements OnInit {
+    policies: Array<UserPolicy>;
+    userPolicies: Array<UserPolicy>;
     click: boolean = false;
-    constructor(private userPolicyService:UserPolicyService,private route:Router){
-        this.policies=[]
+    userRole: string;
+    constructor(private userPolicyService: UserPolicyService,private notifyService: NotificationService,
+         private route: Router, private authService: UserAuthenticateService) {
+        this.policies = [];
+        this.userRole = this.authService.getUserRole();
 
     }
-    ngOnInit(){
+    ngOnInit(): void {
         this.userPolicyService.getUserPolicies().subscribe((policyList: UserPolicy[]) => {
             this.policies = policyList;
-           console.log(this.policies)
-          })
+            console.log(this.policies);
+        });
     }
-    removeBtn(id){
-        this.userPolicyService.removeUserPolicy(id).subscribe((policy:UserPolicy[]) =>{
+    removeBtn(id) {
+        this.userPolicyService.removeUserPolicy(id).subscribe((policy: UserPolicy[]) => {
             this.userPolicies = policy;
             this.click = !this.click;
-            alert("Policy removed!");
+            //alert('Policy Record removed!');
+            this.notifyService.showSuccess('Policy Record removed!','Notification');
             let currentUrl = this.route.url;
             this.route.routeReuseStrategy.shouldReuseRoute = () => false;
             this.route.onSameUrlNavigation = 'reload';
             this.route.navigate([currentUrl]);
-        })
-        
+        },
+            error => {
+                console.error('Error!', error);
+                //alert('Policy does not exist under this name!');
+                this.notifyService.showError('Policy does not exist under this name!','Notification');
+                const currentUrl = this.route.url;
+                this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+                this.route.onSameUrlNavigation = 'reload';
+                this.route.navigate([currentUrl]);
+            }
+        );
+
 
     }
-    verifyBtn(){
+    verifyBtn() {
         this.click = !this.click;
         alert('Policy Verified!');
+    }
+    backBtn(){
+        if(this.userRole==='ADMIN'){
+            this.route.navigateByUrl('/adminpolicylist');
+        }
+        else if(this.userRole==='SUPERADMIN'){
+            this.route.navigateByUrl('/superadminpolicylist');
+
+        }  
     }
 
 }

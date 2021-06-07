@@ -144,3 +144,11 @@
     background-size: cover; 
     height: 600px;
   }
+.update-user{
+  background-image: url('assets/images/bg2.jpg');
+  background-size: cover; 
+  height: 900px; 
+}
+.list{
+  color: red;
+}

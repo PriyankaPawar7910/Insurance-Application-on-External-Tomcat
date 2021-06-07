@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: priypawa
+Build-Jdk: 15.0.2
+Implementation-Title: insurance-app
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.springAnularParent
+Implementation-URL: http://maven.apache.org
+Created-By: Maven Integration for Eclipse
+

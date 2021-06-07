@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm"><br><br>
-                <button [routerLink]="['/adminpolicylist']" type="button" class="btn btn-link">Go Back</button>
+                <button (click)="backBtn()"type="button" class="btn btn-link">Go Back</button>
             </div>
             <div class="col-sm"><br><br>
                 <h2 class="policy-name">Protecting Your Savings</h2>
@@ -50,8 +50,8 @@
                             </p>
                             &nbsp;&nbsp;<button type="button" (click)="verifyBtn()" [disabled]="click"
                                 class="btn btn-warning">Verify</button>&nbsp;
-                            <button type="button" (click)="removeBtn(claimpolicy.claimedPolicy.planId)"
-                                [disabled]="click" class="btn btn-danger">Remove</button>
+                            <!-- <button type="button" (click)="removeBtn(claimpolicy.claimedPolicy.planId)"
+                                [disabled]="click" class="btn btn-danger">Remove</button> -->
 
                         </div>
                     </div>

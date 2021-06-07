@@ -55,7 +55,7 @@ public class ClaimedPolicyService implements IClaimedPolicyService {
 
 			responseTemplates.add(i, responseTemplate);
 		}
-		logger.info("All claim polies returned from ClaimPolicy Service");
+		logger.info("All claim policies returned from ClaimPolicy Service");
 		return responseTemplates;
 
 	}
@@ -113,7 +113,7 @@ public class ClaimedPolicyService implements IClaimedPolicyService {
 
 		for (int i = 0; i < policyList.size(); i++) {
 			claimPolicyDetails = policyList.get(i);
-			logger.info("CalimPolicy=" + claimPolicyDetails);
+			logger.info("ClaimPolicy=" + claimPolicyDetails);
 			User user = restTemplate.getForObject("http://localhost:9494/user-service/user/getUser/" + userId, User.class);
 			logger.info("User=" + user);
 			logger.info("Policy Id=" + claimPolicyDetails.getPolicyId());
@@ -127,6 +127,26 @@ public class ClaimedPolicyService implements IClaimedPolicyService {
 		}
 		logger.info("Returned claim policy by user from ClaimPolicy Service");
 		return responseTemplates;
+	}
+	
+	@Override
+	public List<User> getPolicyHoldersByPolicy(int policyId){
+		List<ClaimedPolicy> policyList = claimPolicyRepository.findAllByPolicyId(policyId);
+		if(policyList.isEmpty()) {
+			throw new NotFoundException("You don't have policies");
+		}
+		ClaimedPolicy claimPolicyDetails = null;
+		List<User> allUsers = new ArrayList<User>();
+		
+		for (int i = 0; i < policyList.size(); i++) {
+			claimPolicyDetails = policyList.get(i);
+			logger.info("ClaimPolicy=" + claimPolicyDetails);
+			User user = restTemplate.getForObject("http://localhost:9494/user-service/user/getUser/" + claimPolicyDetails.getUserId(), User.class);
+			logger.info("User=" + user);
+			allUsers.add(i,user);
+		}
+		return allUsers;
+
 	}
 
 }

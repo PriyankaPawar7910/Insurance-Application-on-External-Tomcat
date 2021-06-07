@@ -16,8 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.insurancepolicy.model.ClaimedPolicy;
+import com.insurancepolicy.model.Policy;
 import com.insurancepolicy.model.ResponseTemplate;
+import com.insurancepolicy.model.User;
 import com.insurancepolicy.service.IClaimedPolicyService;
+
+/**
+ * @author priypawa
+ *
+ */
+
 
 @RestController
 @RequestMapping("/claimpolicy")
@@ -30,13 +38,31 @@ public class ClaimedPolicyController {
 	Logger logger = LoggerFactory.getLogger(ClaimedPolicyController.class);
 
 	
-	@GetMapping("/getAll")
+	/**
+	 * This method returns policy holders list with respective policies
+	 * @return {@link List} of {@link ResponseTemplate}
+	 */
+	@GetMapping("/getAll")	
 	public List<ResponseTemplate> getAllClaimPolicies(){
 		logger.info("All claim polies returned from ClaimPolicy Controller");
 		return claimedPolicyService.getAllClaimPolicies();
 	}
+	/**
+	 * This method return {@link List} of {@link User} with their respective {@link Policy}
+	 * @param id : policyId
+	 * @return {@link List} of {@link User}
+	 */
+	@GetMapping("/getUsersByPolicy/{id}")
+	public List<User> getPolicyHolderByPolicy(@PathVariable("id") int id){
+		return claimedPolicyService.getPolicyHoldersByPolicy(id);
+	}
 	
-	@PostMapping("/add")
+	/**
+	 * 
+	 * @param claimPolicy
+	 * @return
+	 */
+	@PostMapping("/add")	
 	public ClaimedPolicy addClaimPolicy(@RequestBody ClaimedPolicy claimPolicy) {
 		logger.info("Added claim policy from ClaimPolicy Controller");
 		return claimedPolicyService.addClaimPolicy(claimPolicy);

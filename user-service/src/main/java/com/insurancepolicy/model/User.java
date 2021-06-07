@@ -26,13 +26,19 @@ public class User {
 	private String city;
 	@Column
 	private String password;
+	@Column
+	private String role;
+	@Column
+	private String status;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, String firstName, String lastName, String email, String phone, String city,
-			String password) {
+
+
+	public User(int userId, String firstName, String lastName, String email, String phone, String city, String password,
+			String role, String status) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -41,7 +47,11 @@ public class User {
 		this.phone = phone;
 		this.city = city;
 		this.password = password;
+		this.role = role;
+		this.status = status;
 	}
+
+
 
 	public int getUserId() {
 		return userId;
@@ -99,11 +109,47 @@ public class User {
 		this.password = password;
 	}
 
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phone=" + phone + ", city=" + city + ", password=" + password + "]";
+				+ ", phone=" + phone + ", city=" + city + ", password=" + password + ", role=" + role + ", status="
+				+ status + "]";
 	}
+	
+
+
 	
 
 }

@@ -16,6 +16,13 @@ import com.insurancepolicy.repository.UserSave;
 @Service
 public class UserService implements IUserService {
 	
+
+	private static final String USERSTATUS = "USER";
+
+	private static final String INACTIVE = "INACTIVE";
+
+	private static final String SUPERADMIN = "SUPERADMIN";
+
 	@Autowired
 	UserRepository userRepository;
 	
@@ -27,7 +34,15 @@ public class UserService implements IUserService {
 	@Override
 	public List<User> getAllUsers() {
 		logger.info("All Users returned from User Service");
-		return userRepository.findAll();
+		List<User> allUsers = userRepository.findAll();
+	        for(int i=0; i<allUsers.size();i++) {
+	            User userObject = allUsers.get(i);
+	            if(userObject.getRole().equals(SUPERADMIN)) {
+	                allUsers.remove(i);
+	            }
+	        }
+	        return allUsers;
+	    
 	}
 
 	@Override
@@ -36,6 +51,8 @@ public class UserService implements IUserService {
 			throw new NotFoundException("Account already exist");
 		}
 		user.setUserId(userSave.saveUserId());
+		user.setStatus(INACTIVE);
+		user.setRole(USERSTATUS);
 		logger.info("Added user from User Service");
 		return userRepository.save(user);
 	}
@@ -69,9 +86,10 @@ public class UserService implements IUserService {
 	public boolean loginUser(String email, String password) {
 		boolean flag = false;
 		User user = userRepository.findByEmail(email);
-		if(user!=null && user.getPassword().equals(password)) {
-				flag = true;			
+		if(user!=null && (user.getPassword().equals(password)) && user.getStatus().equals("ACTIVE") ) {
+			flag = true;
 		}
+	
 		logger.info("Login Returned from User Service");
 		return flag;
 	}

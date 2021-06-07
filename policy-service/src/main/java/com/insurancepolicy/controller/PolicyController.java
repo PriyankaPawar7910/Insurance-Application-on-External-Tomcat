@@ -52,10 +52,10 @@ public class PolicyController {
 		return policyService.updatePolicy(policy);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public List<Policy> deletePolicy(@PathVariable("id") int policyId){
+	@PutMapping("/delete")
+	public Policy deletePolicy(@RequestBody Policy policy){
 		logger.info("Deleted policy from Policy Controller");
-		return policyService.deletePolicy(policyId);
+		return policyService.deletePolicy(policy);
 	}
 
 }

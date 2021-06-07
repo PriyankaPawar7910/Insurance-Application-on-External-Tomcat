@@ -8,6 +8,10 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author priypawa
+ *
+ */
 @SpringBootApplication
 public class ClaimedPolicyServiceApplication extends SpringBootServletInitializer{
 
